@@ -1,0 +1,7 @@
+{
+    "name": "com.bit34games.unity.update",
+    "displayName": "Bit34 - Unity Update Manager",
+    "version": "1.0.0",
+    "unity": "2018.4",
+    "description": "This is a minimal delayed call library for Unity."
+}

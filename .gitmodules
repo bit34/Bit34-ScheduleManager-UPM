@@ -1,0 +1,3 @@
+[submodule "Assets/Bit34-Unity-Update/Source/Repository"]
+	path = Assets/Bit34-Unity-Update/Source/Repository
+	url = git@github.com:bit34/Bit34-Unity-Update.git
