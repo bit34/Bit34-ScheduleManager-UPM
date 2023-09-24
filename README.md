@@ -1,20 +1,15 @@
-# Update Manager Library for Unity
+# Schedule Manager Library for Unity
 
-This is a minimal delayed call library for Unity.
+This is a minimal scheduled callback library for Unity.
 
 ## Features
 
 Supported calling intervals
-- Call once on next frame
-- Call on every frame
-- Call with delay
-- Call once with delay
-
-Supported call triggers
-- Call on Monobehaviour.Update
-- Call on MonoBehaviour.LateUpdate
+- Call every frame (can be limited by count)
+- Call with interval (can be limited by count)
+- Pause and resume callbacks individualy or as a group by owner key
 
 Supported time scales
+- Utc time
 - Unity unscaled time
 - Unity scaled time
-- System time
