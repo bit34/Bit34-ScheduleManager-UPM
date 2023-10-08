@@ -1,7 +1,7 @@
 {
-    "name": "com.bit34games.schedulemanager",
-    "displayName": "Bit34 - Schedule Manager",
-    "version": "2.0.0",
-    "unity": "2018.4",
-    "description": "This is a minimal library for scheduled callbacks."
+    "name": "com.bit34games.time",
+    "displayName": "Bit34 - Time Manager",
+    "version": "3.0.0",
+    "unity": "2019.4",
+    "description": "This is a minimal time library with scheduled callbacks."
 }

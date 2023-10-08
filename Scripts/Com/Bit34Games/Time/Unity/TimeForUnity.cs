@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Com.Bit34Games.Time.Utilities;
 using Com.Bit34Games.Time.Constants;
@@ -6,13 +7,16 @@ using Com.Bit34Games.Time.Constants;
 
 namespace Com.Bit34Games.Time.Unity
 {
-    public class TimeManager : MonoBehaviour,
-                               ITimeManager
+    public class TimeForUnity : MonoBehaviour,
+                                ITime
     {
         //  MEMBERS
-        public IScheduleManager ScheduleManager { get{ return _scheduleManager; } }
+        public float       TickInterval { get{ return 1.0f / UnityEngine.Application.targetFrameRate; } }
+        public float       TimeScale { get{ return UnityEngine.Time.timeScale; } }
+        public TimeManager Manager { get{ return _timeManager; } }
         //      Private
-        private ScheduleManager _scheduleManager;
+        private TimeManager  _timeManager;
+        private List<Action> _updateMethods;
         
 
         //  METHODS
@@ -20,17 +24,33 @@ namespace Com.Bit34Games.Time.Unity
 
         private void Awake()
         {
-            _scheduleManager = new ScheduleManager(this);
+            GameObject.DontDestroyOnLoad(this.gameObject);
+            _updateMethods = new List<Action>();
+            _timeManager   = new TimeManager(this);
         }
 
         private void Update()
         {
-            _scheduleManager.Update();
+            for (int i = 0; i < _updateMethods.Count; i++)
+            {
+                _updateMethods[i]();
+            }
         }
 
 #endregion
 
-#region ITimeManager implementation
+#region ITime implementation
+
+
+        public void AddTickMethod(Action method)
+        {
+            _updateMethods.Add(method);
+        }
+
+        public void SetTimeScale(float timeScale)
+        {
+            UnityEngine.Time.timeScale = timeScale;
+        }
 
         public DateTime GetNow(TimeTypes timeType)
         {
@@ -46,11 +66,6 @@ namespace Com.Bit34Games.Time.Unity
             if (timeType == TimeTypes.Application)       {   return TimeSpan.FromSeconds(UnityEngine.Time.unscaledDeltaTime); }
             if (timeType == TimeTypes.ApplicationScaled) {   return TimeSpan.FromSeconds(UnityEngine.Time.deltaTime); }
             throw new Exception("Not implemented");
-        }
-
-        public void SetScale(float timeScale)
-        {
-            UnityEngine.Time.timeScale = timeScale;
         }
 
 #endregion

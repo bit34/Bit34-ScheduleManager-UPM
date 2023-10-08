@@ -1,6 +1,6 @@
-# Schedule Manager Library for Unity
+# Time Manager Library for Unity
 
-This is a minimal scheduled callback library for Unity.
+This is a minimal time library with scheduled callbacks.
 
 ## Features
 
